@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lokanta Demir – Türkische Küche in Berlin</title>
+<meta name="description" content="Demo website: Turkish restaurant in Berlin, in German, Turkish and English.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fbf7f1;
+    --surface: #ffffff;
+    --text: #2a211c;
+    --muted: #6f6258;
+    --accent: #b3402a;
+    --accent-dark: #8e2f1e;
+    --gold: #c99a3b;
+    --line: #eadfd2;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 Inter, system-ui, sans-serif; }
+  h1, h2, h3 { font-family: Fraunces, Georgia, serif; line-height: 1.15; margin: 0 0 .5em; }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  .demo-bar { background: var(--text); color: #fff; text-align: center; font-size: 13px; padding: 6px 16px; }
+
+  header { position: sticky; top: 0; z-index: 10; background: rgba(251,247,241,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
+  .logo { font-family: Fraunces, serif; font-weight: 700; font-size: 22px; text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .links { display: flex; gap: 22px; }
+  .links a { text-decoration: none; font-weight: 500; color: var(--muted); }
+  .links a:hover { color: var(--accent); }
+  .lang { display: flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+  .lang button { border: 0; background: transparent; padding: 6px 12px; font: 600 13px Inter, sans-serif; cursor: pointer; color: var(--muted); }
+  .lang button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+
+  .hero { padding: 96px 0 80px; background:
+      radial-gradient(circle at 85% 20%, rgba(201,154,59,.18), transparent 45%),
+      radial-gradient(circle at 10% 90%, rgba(179,64,42,.12), transparent 40%); }
+  .hero h1 { font-size: clamp(38px, 6vw, 64px); max-width: 14ch; }
+  .hero p { font-size: 19px; color: var(--muted); max-width: 52ch; }
+  .btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .btn { display: inline-block; padding: 13px 24px; border-radius: 999px; font-weight: 600; text-decoration: none; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-dark); }
+  .btn-ghost { border: 1.5px solid var(--text); }
+
+  section { padding: 72px 0; }
+  .eyebrow { color: var(--accent); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; font-size: 13px; }
+  h2 { font-size: clamp(28px, 4vw, 40px); }
+
+  .about { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px; text-align: center; }
+  .stat b { display: block; font-family: Fraunces, serif; font-size: 30px; color: var(--accent); }
+  .stat span { color: var(--muted); font-size: 14px; }
+
+  .menu-section { background: var(--surface); border-block: 1px solid var(--line); }
+  .menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 32px; }
+  .menu h3 { font-size: 22px; border-bottom: 2px solid var(--gold); padding-bottom: 8px; }
+  .dish { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px dashed var(--line); }
+  .dish p { margin: 2px 0 0; color: var(--muted); font-size: 14px; }
+  .price { font-weight: 600; white-space: nowrap; }
+
+  .info { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 28px; }
+  .card h3 { font-size: 20px; }
+  .hours { width: 100%; border-collapse: collapse; }
+  .hours td { padding: 4px 0; }
+  .hours td:last-child { text-align: right; font-weight: 500; }
+
+  .reserve { display: grid; grid-template-columns: 1fr 1.3fr; gap: 48px; align-items: start; }
+  form.card { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  form label { display: grid; gap: 6px; font-weight: 500; font-size: 14px; }
+  form .full { grid-column: 1 / -1; }
+  form input, form select, form textarea { font: inherit; padding: 11px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--text); width: 100%; }
+  form input:focus, form select:focus, form textarea:focus { outline: 2px solid var(--accent); border-color: transparent; }
+  form button { border: 0; cursor: pointer; font: inherit; }
+  .small { color: var(--muted); font-size: 13px; margin: 0; }
+  .hidden { display: none; }
+
+  .map { margin-top: 24px; height: 340px; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); display: grid; place-items: center; text-align: center; padding: 24px; }
+  .map iframe { width: 100%; height: 100%; border: 0; }
+  .map.loaded { padding: 0; }
+
+  .whatsapp { position: fixed; right: 20px; bottom: 76px; /* clears the Netlify badge */ z-index: 20; display: flex; align-items: center; gap: 8px; background: #25d366; color: #fff; text-decoration: none; font-weight: 600; padding: 12px 18px; border-radius: 999px; box-shadow: 0 6px 20px rgba(0,0,0,.18); }
+  .whatsapp:hover { background: #1ebe5a; }
+  .whatsapp svg { width: 22px; height: 22px; fill: currentColor; }
+
+  footer { background: var(--text); color: #d8cfc6; padding: 32px 0; font-size: 14px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+
+  @media (max-width: 760px) {
+    .links { display: none; }
+    .about { grid-template-columns: minmax(0, 1fr); }
+    .stats { gap: 8px; }
+    .stat { padding: 14px 6px; }
+    .stat b { font-size: 24px; }
+    .menu { grid-template-columns: minmax(0, 1fr); }
+    .reserve { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+    form.card { grid-template-columns: minmax(0, 1fr); }
+    .whatsapp span { display: none; }
+    .whatsapp { padding: 14px; }
+    .hero { padding: 64px 0 56px; }
+    section { padding: 56px 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-bar" data-i18n="demo"></div>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo">Lokanta <span>Demir</span></a>
+    <nav class="links">
+      <a href="#about" data-i18n="nav_about"></a>
+      <a href="#menu" data-i18n="nav_menu"></a>
+      <a href="#reserve" data-i18n="nav_reserve"></a>
+      <a href="#visit" data-i18n="nav_visit"></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button data-lang="de">DE</button>
+      <button data-lang="tr">TR</button>
+      <button data-lang="en">EN</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow" data-i18n="hero_eyebrow"></div>
+      <h1 data-i18n="hero_title"></h1>
+      <p data-i18n="hero_text"></p>
+      <div class="btns">
+        <a class="btn btn-primary" href="#reserve" data-i18n="cta_reserve"></a>
+        <a class="btn btn-ghost" href="#menu" data-i18n="cta_menu"></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap about">
+      <div>
+        <div class="eyebrow" data-i18n="about_eyebrow"></div>
+        <h2 data-i18n="about_title"></h2>
+        <p data-i18n="about_text"></p>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>25+</b><span data-i18n="stat_years"></span></div>
+        <div class="stat"><b>100%</b><span data-i18n="stat_halal"></span></div>
+        <div class="stat"><b>4.8★</b><span data-i18n="stat_rating"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu" class="menu-section">
+    <div class="wrap">
+      <div class="eyebrow" data-i18n="menu_eyebrow"></div>
+      <h2 data-i18n="menu_title"></h2>
+      <div class="menu">
+        <div>
+          <h3 data-i18n="cat_starters"></h3>
+          <div class="dish"><div><b>Mercimek Çorbası</b><p data-i18n="d_soup"></p></div><span class="price">5,90 €</span></div>
+          <div class="dish"><div><b>Meze Tabağı</b><p data-i18n="d_meze"></p></div><span class="price">11,50 €</span></div>
+          <div class="dish"><div><b>Sigara Böreği</b><p data-i18n="d_borek"></p></div><span class="price">6,90 €</span></div>
+        </div>
+        <div>
+          <h3 data-i18n="cat_mains"></h3>
+          <div class="dish"><div><b>Adana Kebap</b><p data-i18n="d_adana"></p></div><span class="price">16,90 €</span></div>
+          <div class="dish"><div><b>İskender</b><p data-i18n="d_iskender"></p></div><span class="price">17,90 €</span></div>
+          <div class="dish"><div><b>Lahmacun</b><p data-i18n="d_lahmacun"></p></div><span class="price">7,50 €</span></div>
+        </div>
+        <div>
+          <h3 data-i18n="cat_desserts"></h3>
+          <div class="dish"><div><b>Künefe</b><p data-i18n="d_kunefe"></p></div><span class="price">7,90 €</span></div>
+          <div class="dish"><div><b>Baklava</b><p data-i18n="d_baklava"></p></div><span class="price">5,90 €</span></div>
+          <div class="dish"><div><b>Türk Kahvesi</b><p data-i18n="d_coffee"></p></div><span class="price">3,50 €</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reserve">
+    <div class="wrap reserve">
+      <div>
+        <div class="eyebrow" data-i18n="res_eyebrow"></div>
+        <h2 data-i18n="res_title"></h2>
+        <p data-i18n="res_text"></p>
+        <p class="small" data-i18n="res_note"></p>
+      </div>
+      <form class="card" name="reservation" method="POST" data-netlify="true" netlify-honeypot="company">
+        <input type="hidden" name="form-name" value="reservation">
+        <input type="hidden" name="language" id="form-lang" value="de">
+        <p class="hidden"><label>Company <input name="company"></label></p>
+        <label class="full"><span data-i18n="f_name"></span><input name="name" required autocomplete="name"></label>
+        <label><span data-i18n="f_phone"></span><input name="phone" type="tel" required autocomplete="tel"></label>
+        <label><span data-i18n="f_email"></span><input name="email" type="email" autocomplete="email"></label>
+        <label><span data-i18n="f_date"></span><input name="date" type="date" required id="res-date"></label>
+        <label><span data-i18n="f_time"></span><input name="time" type="time" required min="12:00" max="23:00" step="900"></label>
+        <label class="full"><span data-i18n="f_guests"></span>
+          <select name="guests" required>
+            <option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10+</option>
+          </select>
+        </label>
+        <label class="full"><span data-i18n="f_message"></span><textarea name="message" rows="3"></textarea></label>
+        <button class="btn btn-primary full" type="submit" data-i18n="f_submit"></button>
+      </form>
+    </div>
+  </section>
+
+  <section id="visit">
+    <div class="wrap">
+      <div class="eyebrow" data-i18n="visit_eyebrow"></div>
+      <h2 data-i18n="visit_title"></h2>
+      <div class="info">
+        <div class="card">
+          <h3 data-i18n="hours_title"></h3>
+          <table class="hours">
+            <tr><td data-i18n="mon_thu"></td><td>12:00 – 22:00</td></tr>
+            <tr><td data-i18n="fri_sat"></td><td>12:00 – 23:30</td></tr>
+            <tr><td data-i18n="sun"></td><td>13:00 – 21:00</td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <h3 data-i18n="address_title"></h3>
+          <p>Musterstraße 12<br>10115 Berlin</p>
+          <p data-i18n="address_note"></p>
+        </div>
+        <div class="card">
+          <h3 data-i18n="contact_title"></h3>
+          <p>📞 <a href="tel:+49300000000">030 0000000</a><br>✉️ <a href="mailto:hallo@example.com">hallo@example.com</a></p>
+          <p data-i18n="contact_note"></p>
+        </div>
+      </div>
+      <div class="map" id="map">
+        <div>
+          <p data-i18n="map_note"></p>
+          <button class="btn btn-ghost" type="button" id="map-load" data-i18n="map_load" style="background:transparent;cursor:pointer;font:inherit;font-weight:600"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<a class="whatsapp" href="https://wa.me/49300000000" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
+  <span data-i18n="wa_label"></span>
+</a>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Lokanta Demir</span>
+    <span data-i18n="footer"></span>
+  </div>
+</footer>
+
+<script>
+const T = {
+  de: {
+    title: "Lokanta Demir – Türkische Küche in Berlin",
+    demo: "Demo-Website – fiktives Restaurant für ein Portfolio",
+    nav_about: "Über uns", nav_menu: "Speisekarte", nav_visit: "Besuch",
+    hero_eyebrow: "Türkische Küche · Berlin-Mitte",
+    hero_title: "Hausgemachte Küche wie bei Oma in Anatolien",
+    hero_text: "Frisch vom Holzkohlegrill, mit Rezepten, die seit drei Generationen in unserer Familie weitergegeben werden.",
+    cta_reserve: "Tisch reservieren", cta_menu: "Zur Speisekarte",
+    about_eyebrow: "Über uns",
+    about_title: "Ein Familienbetrieb seit 1999",
+    about_text: "Was als kleiner Imbiss begann, ist heute ein Treffpunkt für Nachbarn, Familien und Gäste aus aller Welt. Wir kochen jeden Tag frisch – mit Zutaten aus der Region und Gewürzen direkt aus der Türkei.",
+    stat_years: "Jahre Erfahrung", stat_halal: "Halal", stat_rating: "Gästebewertung",
+    menu_eyebrow: "Speisekarte", menu_title: "Unsere Lieblingsgerichte",
+    cat_starters: "Vorspeisen", cat_mains: "Hauptgerichte", cat_desserts: "Desserts & Getränke",
+    d_soup: "Rote Linsensuppe mit Zitrone und Minze",
+    d_meze: "Auswahl an kalten Vorspeisen mit frischem Fladenbrot",
+    d_borek: "Knusprige Teigröllchen mit Schafskäse",
+    d_adana: "Scharfer Hackfleischspieß vom Holzkohlegrill mit Bulgur",
+    d_iskender: "Dönerfleisch auf Brot mit Tomatensoße und Joghurt",
+    d_lahmacun: "Dünner Teigfladen mit würzigem Hackfleisch",
+    d_kunefe: "Warmes Engelshaar-Dessert mit Käse und Sirup",
+    d_baklava: "Blätterteig mit Pistazien, hausgemacht",
+    d_coffee: "Traditionell im Kupferkännchen zubereitet",
+    visit_eyebrow: "Besuch", visit_title: "Wir freuen uns auf Sie",
+    hours_title: "Öffnungszeiten", mon_thu: "Mo – Do", fri_sat: "Fr – Sa", sun: "So",
+    address_title: "Adresse", address_note: "5 Minuten zu Fuß von der U-Bahn.",
+    contact_title: "Kontakt", contact_note: "Reservierungen auch per Telefon oder WhatsApp.",
+    footer: "Demo · Alle Angaben sind fiktiv",
+    nav_reserve: "Reservieren",
+    res_eyebrow: "Reservierung", res_title: "Tisch online anfragen",
+    res_text: "Schicken Sie uns Ihre Wunschzeit – wir bestätigen Ihre Reservierung schnellstmöglich per Telefon oder E-Mail.",
+    res_note: "Für Gruppen ab 10 Personen rufen Sie uns bitte direkt an.",
+    f_name: "Name", f_phone: "Telefon", f_email: "E-Mail (optional)", f_date: "Datum", f_time: "Uhrzeit",
+    f_guests: "Personen", f_message: "Anmerkungen (optional)", f_submit: "Reservierung anfragen",
+    map_note: "Beim Laden der Karte werden Daten an Google übertragen.", map_load: "Karte laden",
+    wa_label: "WhatsApp"
+  },
+  tr: {
+    title: "Lokanta Demir – Berlin'de Türk Mutfağı",
+    demo: "Demo web sitesi – portföy için hayali bir restoran",
+    nav_about: "Hakkımızda", nav_menu: "Menü", nav_visit: "Ziyaret",
+    hero_eyebrow: "Türk Mutfağı · Berlin-Mitte",
+    hero_title: "Anadolu'daki anneanne sofrası gibi ev yemekleri",
+    hero_text: "Kömür ateşinden taze, ailemizde üç kuşaktır aktarılan tariflerle.",
+    cta_reserve: "Masa ayırt", cta_menu: "Menüyü gör",
+    about_eyebrow: "Hakkımızda",
+    about_title: "1999'dan beri bir aile işletmesi",
+    about_text: "Küçük bir büfe olarak başlayan yerimiz, bugün komşuların, ailelerin ve dünyanın her yerinden misafirlerin buluşma noktası. Her gün taze pişiriyoruz – yöresel malzemeler ve doğrudan Türkiye'den gelen baharatlarla.",
+    stat_years: "Yıllık tecrübe", stat_halal: "Helal", stat_rating: "Misafir puanı",
+    menu_eyebrow: "Menü", menu_title: "En sevilen yemeklerimiz",
+    cat_starters: "Başlangıçlar", cat_mains: "Ana yemekler", cat_desserts: "Tatlılar & İçecekler",
+    d_soup: "Limon ve naneli kırmızı mercimek çorbası",
+    d_meze: "Taze pide ile soğuk meze çeşitleri",
+    d_borek: "Beyaz peynirli çıtır yufka ruloları",
+    d_adana: "Kömür ateşinde acılı kıyma kebabı, bulgur pilavı ile",
+    d_iskender: "Pide üzerinde döner, domates sosu ve yoğurt ile",
+    d_lahmacun: "Baharatlı kıymalı ince hamur",
+    d_kunefe: "Peynirli ve şerbetli sıcak tel kadayıf tatlısı",
+    d_baklava: "Antep fıstıklı, ev yapımı",
+    d_coffee: "Geleneksel bakır cezvede pişirilir",
+    visit_eyebrow: "Ziyaret", visit_title: "Sizi bekliyoruz",
+    hours_title: "Çalışma saatleri", mon_thu: "Pzt – Per", fri_sat: "Cum – Cmt", sun: "Paz",
+    address_title: "Adres", address_note: "Metroya 5 dakika yürüme mesafesinde.",
+    contact_title: "İletişim", contact_note: "Rezervasyon telefonla veya WhatsApp'tan da yapılabilir.",
+    footer: "Demo · Tüm bilgiler hayalidir",
+    nav_reserve: "Rezervasyon",
+    res_eyebrow: "Rezervasyon", res_title: "Online masa ayırtın",
+    res_text: "İstediğiniz saati bize gönderin – rezervasyonunuzu en kısa sürede telefon veya e-posta ile onaylayalım.",
+    res_note: "10 kişi ve üzeri gruplar için lütfen bizi doğrudan arayın.",
+    f_name: "Ad Soyad", f_phone: "Telefon", f_email: "E-posta (isteğe bağlı)", f_date: "Tarih", f_time: "Saat",
+    f_guests: "Kişi sayısı", f_message: "Notunuz (isteğe bağlı)", f_submit: "Rezervasyon talebi gönder",
+    map_note: "Harita yüklendiğinde veriler Google'a aktarılır.", map_load: "Haritayı yükle",
+    wa_label: "WhatsApp"
+  },
+  en: {
+    title: "Lokanta Demir – Turkish Cuisine in Berlin",
+    demo: "Demo website – a fictional restaurant for a portfolio",
+    nav_about: "About", nav_menu: "Menu", nav_visit: "Visit",
+    hero_eyebrow: "Turkish Cuisine · Berlin-Mitte",
+    hero_title: "Home cooking like grandma's in Anatolia",
+    hero_text: "Fresh from the charcoal grill, with recipes passed down through three generations of our family.",
+    cta_reserve: "Book a table", cta_menu: "See the menu",
+    about_eyebrow: "About us",
+    about_title: "A family business since 1999",
+    about_text: "What started as a small snack bar is now a meeting place for neighbours, families and guests from all over the world. We cook fresh every day – with local ingredients and spices straight from Turkey.",
+    stat_years: "Years of experience", stat_halal: "Halal", stat_rating: "Guest rating",
+    menu_eyebrow: "Menu", menu_title: "Our favourite dishes",
+    cat_starters: "Starters", cat_mains: "Mains", cat_desserts: "Desserts & Drinks",
+    d_soup: "Red lentil soup with lemon and mint",
+    d_meze: "Selection of cold starters with fresh flatbread",
+    d_borek: "Crispy pastry rolls with feta cheese",
+    d_adana: "Spicy minced-meat skewer from the charcoal grill, with bulgur",
+    d_iskender: "Döner on bread with tomato sauce and yoghurt",
+    d_lahmacun: "Thin flatbread with spiced minced meat",
+    d_kunefe: "Warm shredded-pastry dessert with cheese and syrup",
+    d_baklava: "Filo pastry with pistachios, homemade",
+    d_coffee: "Traditionally brewed in a copper pot",
+    visit_eyebrow: "Visit", visit_title: "We look forward to seeing you",
+    hours_title: "Opening hours", mon_thu: "Mon – Thu", fri_sat: "Fri – Sat", sun: "Sun",
+    address_title: "Address", address_note: "5 minutes' walk from the U-Bahn.",
+    contact_title: "Contact", contact_note: "Reservations also by phone or WhatsApp.",
+    footer: "Demo · All details are fictional",
+    nav_reserve: "Reserve",
+    res_eyebrow: "Reservations", res_title: "Request a table online",
+    res_text: "Send us your preferred time – we'll confirm your booking as soon as possible by phone or email.",
+    res_note: "For groups of 10 or more, please call us directly.",
+    f_name: "Name", f_phone: "Phone", f_email: "Email (optional)", f_date: "Date", f_time: "Time",
+    f_guests: "Guests", f_message: "Notes (optional)", f_submit: "Request booking",
+    map_note: "Loading the map sends data to Google.", map_load: "Load map",
+    wa_label: "WhatsApp"
+  }
+};
+
+function setLang(lang) {
+  const t = T[lang];
+  document.documentElement.lang = lang;
+  document.title = t.title;
+  document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t[el.dataset.i18n]; });
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === lang));
+  document.getElementById("form-lang").value = lang;
+  try { localStorage.setItem("lang", lang); } catch (e) {}
+}
+
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
+
+document.getElementById("res-date").min = new Date().toLocaleDateString("sv"); // YYYY-MM-DD in local time
+
+document.getElementById("map-load").addEventListener("click", () => {
+  const map = document.getElementById("map");
+  map.classList.add("loaded");
+  map.innerHTML = '<iframe loading="lazy" title="Map" src="https://www.google.com/maps?q=Berlin-Mitte&output=embed"></iframe>';
+});
+
+let saved = null;
+try { saved = localStorage.getItem("lang"); } catch (e) {}
+setLang(T[saved] ? saved : "de");
+</script>
+</body>
+</html>
